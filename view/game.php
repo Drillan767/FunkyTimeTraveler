@@ -1,15 +1,8 @@
 <div id="content">
   <h2>Jeu</h2>
-  <div id="game_container" onkeydown="set_focus()" onload="set_focus()" onkeypress="stop_key(event)" onfocus="set_focus()">
-    <div id="game" onkeydown="key_event(event, 'down')" onclick="//alert('X: ' + event.offsetX + ' Y: ' + event.offsetY)" onkeyup="key_event(event, 'up')" onkeypress="stop_key(event)">
-      <img id="mario" src="./assets/img/hero/noWalk.gif">
-    </div>
-  </div>
-  <script type="text/javascript">
-  function key_event(e, pos) {
-    console.log('drf');
-    console.log(e);
-  }
+    <canvas id="canvas" width="1024" height="600"></canvas>
+    <script type="text/javascript"></script>
+  <!--<script type="text/javascript">
   /* Mario states */
 var _IDLE          = 1;
 var _WALKING       = 2;
@@ -344,5 +337,5 @@ mario.jump = function()
   mario.jump_data += (mario.bumps_up ? 12 : 4);
   $("mario").style.top = (mario.position[1] += (Math.sin((mario.jump_data + 270) * Math.PI/180) * (4.7 + (((mario.speed < mario.walk_speed ? mario.walk_speed : mario.speed) - mario.walk_speed) * 1.5)))) - mario.height[mario.size] + "px";
   if (mario.jump_data > 90) { mario.jump_data = 0; mario.jumping = false; mario.bumps_up = false; }
-}</script>
+}</script>-->
 </div>

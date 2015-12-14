@@ -20,20 +20,7 @@ body {
   -webkit-justify-content: center;
 }
 
-#game_container {
-  background-color: red;
-  width: 1024px;
-  height: 600px;
+#canvas {
+  background: #eeeeee;
   margin: 0px auto;
-}
-
-#game {
- height: 100%;
- position: relative;
-}
-
-#game #mario {
-  position: absolute;
-  bottom: 20px;
-  left: 40%;
 }
