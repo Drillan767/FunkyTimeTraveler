@@ -1,0 +1,39 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  max-width: 100%;
+  font-family: Arial;
+  color: #5e5e5e;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex; 
+  -webkit-flex-direction:column;
+  -webkit-justify-content: center;
+}
+
+#game_container {
+  background-color: red;
+  width: 1024px;
+  height: 600px;
+  margin: 0px auto;
+}
+
+#game {
+ height: 100%;
+ position: relative;
+}
+
+#game #mario {
+  position: absolute;
+  bottom: 20px;
+  left: 40%;
+}
