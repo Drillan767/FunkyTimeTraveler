@@ -144,7 +144,7 @@ Q.options = {
   Q.scene("level1",function(stage) {
 
     // Add in a repeater for a little parallax action
-    stage.insert(new Q.Repeater({ asset: "background-wall.png"}));
+    stage.insert(new Q.Repeater({ asset: "background/prehistory.png"}));
 
     // Add in a tile layer, and make it the collision layer
     stage.collisionLayer(new Q.TileLayer({
@@ -164,13 +164,13 @@ Q.options = {
     stage.insert(new Q.Enemy({ x: 800, y: 0 }));
 
     // Finally add in the tower goal
-    stage.insert(new Q.Tower({ x: 71, y: 401 }));
+    stage.insert(new Q.Tower({ x: 71, y: 501 }));
   });
 
   Q.scene("level2",function(stage) {
 
     // Add in a repeater for a little parallax action
-    stage.insert(new Q.Repeater({ asset: "background-wall.png"}));
+    stage.insert(new Q.Repeater({ asset: "background/middle_age.png"}));
 
     // Add in a tile layer, and make it the collision layer
     stage.collisionLayer(new Q.TileLayer({
@@ -191,12 +191,12 @@ Q.options = {
     stage.insert(new Q.Enemy({ x: 800, y: 0 }));
     stage.insert(new Q.Enemy({ x: 200, y: 0 }));
     stage.insert(new Q.Enemy({ x: 400, y: 0 }));
-    stage.insert(new Q.Enemy({ x: 300, y: 0 }));
+    stage.insert(new Q.Enemy({ x: 100, y: 0 }));
     stage.insert(new Q.Enemy({ x: 500, y: 0 }));
 
 
     // Finally add in the tower goal
-    stage.insert(new Q.Tower({ x: 71, y: 401 }));
+    stage.insert(new Q.Tower({ x: 81, y: 501 }));
   });
 
   // To display a game over / game won popup box, 
@@ -228,7 +228,7 @@ Q.options = {
   // Q.load can be called at any time to load additional assets
   // assets that are already loaded will be skipped
   // The callback will be triggered when everything is loaded
-  Q.load("sprites.png, sprites.json, level.json, tiles.png, background-wall.png", function() {
+  Q.load("sprites.png, sprites.json, level.json, tiles.png, background/prehistory.png, background/middle_age.png, background/renaissance.png, background/disco.png, background/futur.png", function() {
     // Sprites sheets can be created manually
     Q.sheet("tiles","tiles.png", { tilew: 32, tileh: 32 });
 
