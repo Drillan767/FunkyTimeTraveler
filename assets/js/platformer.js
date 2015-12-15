@@ -41,6 +41,7 @@ $(document).ready(function() {
   }
 
   window.addEventListener("load",function() {
+    var level = 0;
 
   // Set up an instance of the Quintus engine  and include
   // the Sprites, Scenes, Input and 2D module. The 2D module
@@ -48,17 +49,19 @@ $(document).ready(function() {
   var Q = window.Q = Quintus()
   .include("Sprites, Scenes, Input, 2D, Anim, Touch, UI")
           // Maximize this game to whatever the size of the browser is
-          .setup({width:1024,
-            height:600
+          .setup({
+            width: 1024,
+            height: 600,
+            maximize: "touch"
           })
           // And turn on default input controls and touch input (for UI)
           .controls().touch()
 
-Q.options = {
-    imagePath: "assets/img/",
-    audioPath: "assets/audio/",
-    dataPath:  "assets/json/"
-  };
+          Q.options = {
+            imagePath: "assets/img/",
+            audioPath: "assets/audio/",
+            dataPath:  "assets/json/"
+          };
 
   // ## Player Sprite
   // The very basic player sprite, this is just a normal sprite
@@ -90,7 +93,8 @@ Q.options = {
 
         // Check the collision, if it's the Tower, you win!
         if(collision.obj.isA("Tower")) {
-          Q.stageScene("endGame",1, { label: "You Won!" }); 
+          Q.stageScene("endGame",1, { label: "Gagné !" }); 
+          level++;
           this.destroy();
         }
       });
@@ -122,7 +126,7 @@ Q.options = {
       // end the game unless the enemy is hit on top
       this.on("bump.left,bump.right,bump.bottom",function(collision) {
         if(collision.obj.isA("Player")) { 
-          Q.stageScene("endGame",1, { label: "You Died" }); 
+          Q.stageScene("endGame",1, { label: "Game Over" }); 
           collision.obj.destroy();
           chrono.Timer.toggle();
         }
@@ -204,19 +208,40 @@ Q.options = {
   // to control the displayed message.
   Q.scene('endGame',function(stage) {
     var container = stage.insert(new Q.UI.Container({
-      x: Q.width/2, y: Q.height/2, fill: "rgba(0,0,0,0.5)"
+      x: Q.width/2,
+      y: Q.height/2,
+      fill: "rgba(0,0,0,0.5)"
     }));
 
-    var button = container.insert(new Q.UI.Button({ x: 0, y: 0, fill: "#CCCCCC",
-      label: "Play Again" }))         
-    var label = container.insert(new Q.UI.Text({x:10, y: -10 - button.p.h, 
-     label: stage.options.label }));
+    var restartButton = container.insert(new Q.UI.Button({
+      x: 0,
+      y: 0,
+      fill: "#CCCCCC",
+      label: "Recommencer"
+    }))         
+    var label = container.insert(new Q.UI.Text({
+      x: 4,
+      y: -20 - restartButton.p.h, 
+      label: stage.options.label,
+      color: "#FFF"
+    }));
+    var menuButton = container.insert(new Q.UI.Button({
+      x: 0,
+      y: 20 + label.p.h, 
+      fill: "#CCCCCC",
+      label: "Menu"
+    }))  
     // When the button is clicked, clear all the stages
     // and restart the game.
-    button.on("click",function() {
+    restartButton.on("click",function() {
       Q.clearStages();
-      if(stage.options.label != 'You Died')
-        Q.stageScene('level2');
+      if (level != 0) {
+        Q.stageScene('level'+level);
+      }
+    });
+
+    menuButton.on("click",function() {
+      window.location = window.location.href;
     });
 
     // Expand the container to visibily fit it's contents
