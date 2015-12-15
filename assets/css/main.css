@@ -1,26 +1,12 @@
 * {
-  margin: 0px;
-  padding: 0px;
-  max-width: 100%;
-  font-family: Arial;
-  color: #5e5e5e;
+	margin: 0px;
+	padding: 0px;
+	max-width: 100%;
+	box-sizing: border-box;
 }
 
-html, body {
-  height: 100%;
-}
-
-body {
-  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
-  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
-  display: -ms-flexbox;      /* TWEENER - IE 10 */
-  display: -webkit-flex;     /* NEW - Chrome */
-  display: flex; 
-  -webkit-flex-direction:column;
-  -webkit-justify-content: center;
-}
-
-#canvas {
-  background: #eeeeee;
-  margin: 0px auto;
+#quintus_container {
+	position: absolute !important;
+	z-index: -1;
+	top: 0px;
 }
