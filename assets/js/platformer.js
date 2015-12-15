@@ -41,7 +41,7 @@ $(document).ready(function() {
   }
 
   window.addEventListener("load",function() {
-    var level = 0;
+    var level = 1;
 
   // Set up an instance of the Quintus engine  and include
   // the Sprites, Scenes, Input and 2D module. The 2D module
@@ -93,8 +93,8 @@ $(document).ready(function() {
 
         // Check the collision, if it's the Tower, you win!
         if(collision.obj.isA("Tower")) {
-          Q.stageScene("endGame",1, { label: "Gagné !" }); 
           level++;
+          Q.stageScene("endGame",1, { label: "Gagné !" }); 
           this.destroy();
         }
       });
@@ -195,7 +195,6 @@ $(document).ready(function() {
     stage.insert(new Q.Enemy({ x: 800, y: 0 }));
     stage.insert(new Q.Enemy({ x: 200, y: 0 }));
     stage.insert(new Q.Enemy({ x: 400, y: 0 }));
-    stage.insert(new Q.Enemy({ x: 100, y: 0 }));
     stage.insert(new Q.Enemy({ x: 500, y: 0 }));
 
 
@@ -241,7 +240,7 @@ $(document).ready(function() {
     });
 
     menuButton.on("click",function() {
-      window.location = window.location.href;
+      window.location = location.protocol + '//' + location.host + location.pathname;
     });
 
     // Expand the container to visibily fit it's contents
@@ -261,7 +260,7 @@ $(document).ready(function() {
     Q.compileSheets("sprites.png","sprites.json");
 
     // Finally, call stageScene to run the game
-    Q.stageScene("level1");
+    Q.stageScene('level'+level);
   });
 
 });
