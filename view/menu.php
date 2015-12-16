@@ -5,26 +5,28 @@
 
 <div id="menu">
 
-	<img id ="menu-gauche" src="./assets/img/menu_background.png"  alt="image"/>
-	<div id="flamme"><img src="./assets/img/flamme.gif" width="70px" height="70px"/></div>
+	<div id="flamme"><img src="./assets/img/flame.gif" width="70px" height="70px"/></div>
 	<div id="menu-central"> 
 
 		<span class="big-titre"><a href="#">Funky</a></span>
 		<h4>Time Traveler</h4><br>
-		<img src="./assets/img/sablier.gif" width="85px" height="85px" style="padding-top: 20px;"/>
+		<img src="./assets/img/hourglass.gif" width="85px" height="85px" style="padding-top: 20px;"/>
 		<div id="cadre-btn">
 
 			<div class="btn"> <a href="?page=game" id="jouer" >Commencer à jouer</a></div>
 			<div class="btn"> <a href="?page=rules" class="btn">Comment jouer</a></div>
-			<div class="btn"> <a href="#" class="btn">Classements</a></div>
+			<div class="btn"> <a href="?page=ranking" class="btn">Classements</a></div>
 			<div class="btn"> <a href="#creditos" name="creditos" class="btn">Crédits</a></div>
 			<span class="copyright">Copyright G4 LTD. 2015</span>
 
 		</div>
 	</div>
-	<div id="flamme2"><img src="./assets/img/flamme.gif" width="70px" height="70px"/></div>
-	<img id ="menu-droite" src="./assets/img/menu_background.png"  alt="image"/>
+	<div id="flamme2"><img src="./assets/img/flame.gif" width="70px" height="70px"/></div>
 	<div class="clearfix"></div>
+	<audio preload="auto" loop autoplay>
+		<source src="./assets/audio/main.ogg" type="audio/ogg"/>
+		<source src="./assets/audio/main.mp3" type="audio/mpeg"/>
+	</audio>
 </div>
 
 <!-- Credits -->
@@ -56,5 +58,9 @@
 		</dl>
 
 		<h1>Copyright G4 2015</h1>
+		<audio preload="auto" loop>
+			<source src="./assets/audio/credits.ogg" type="audio/ogg"/>
+			<source src="./assets/audio/credits.mp3" type="audio/mpeg"/>
+		</audio>
 	</div>
 </div>

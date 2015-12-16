@@ -1,11 +1,24 @@
 $(document).ready(function() {
-  var player = null;
+  var player_name = 'Nom';
+  var Qplayer = null;
+  var Qenemy = null;
+  var win = false;
+  var score = 0;
+  var level = 1;
+  var maxLevel = 5;
+  var startTime = 10000;
+  var maxTime = 20000;
+  var period = null;
+
+  var winLabel = 'Gagné !';
+  var loseLabel = 'Game Over';
+
   // Timer
   var chrono = new (function() {
     // Stopwatch element on the page
-    var $countdown = $('#countdown');
+    var $countdown = $('#timer .display');
     // Timer speed in milliseconds
-    var incrementTime = 70;
+    var incrementTime = 50;
     // Current timer position in milliseconds
     var currentTime = 10000; // 10s
 
@@ -20,35 +33,43 @@ $(document).ready(function() {
       $countdown.html(timeString);
 
       // If timer is complete, trigger alert
-      if (currentTime == 0  && player.isAlive) {
+      if (currentTime == 0  && Qplayer.isAlive) {
         chrono.Timer.stop();
         win = false;
-        Q.stageScene("endGame",1, { label: "Game Over" });
+        Q.stageScene("endGame",1, { label: loseLabel });
       }
-      if (currentTime > 8000 && currentTime < 8200) {
-        Q.stage().insert(new Q.Enemy({x:700, y:0}));
+      if (currentTime >= maxTime) {
+        win = true;
+        Q.stageScene("endGame",1, { label: winLabel });
       }
 
-      // Increment timer position
-      currentTime -= incrementTime;
-      if (currentTime < 0) currentTime = 0;
+      // Decrement timer position
+      if (currentTime <= 0) {
+        currentTime = 0;
+      } else {
+        currentTime -= incrementTime;
+        $('#timer #progress').css('width', (currentTime/maxTime*100)+'%');
+        $('#score .display').html(score);
+      }
     }
 
     this.resetCountdown = function() {
-      currentTime = 10000;
+      currentTime = startTime;
+      chrono.Timer.stop().once();
+    };
 
-        // Stop and reset timer
-        chrono.Timer.stop().once();
-      };
+    this.decTime = function(milliseconds){
+      currentTime -= milliseconds;
+    };
 
-      this.minTime = function(milliseconds){
-        currentTime -= milliseconds;
-      };
+    this.incTime = function(milliseconds){
+      currentTime += milliseconds;
+    }
 
-      this.addTime = function(milliseconds){
-        currentTime += milliseconds;
-      }
-    });
+    this.getCurrentTime = function(){
+      return currentTime;
+    }
+  });
 
 
 function pad(number, length) {
@@ -66,35 +87,30 @@ function formatTime(time) {
 }
 
 window.addEventListener("load",function() {
-  var win = false;
-  var level = 1;
-  var maxLevel = 5;
-
   // Set up an instance of the Quintus engine  and include
   // the Sprites, Scenes, Input and 2D module. The 2D module
   // includes the `TileLayer` class as well as the `2d` componet.
-  var Q = window.Q = Quintus()
-  .include("Sprites, Scenes, Input, 2D, Anim, Touch, UI")
+  var Q = window.Q = Quintus({
+    imagePath: "../assets/img/",
+    audioPath: "../assets/audio/",
+    dataPath:  "../assets/json/"
+  })
+  .include("Audio, Sprites, Scenes, Input, 2D, Touch, Anim, UI")
   .setup({
     width: 1024,
     height: 600,
-    maximize: "touch" // Maximize this game for touch screen
+    // scaleToFit: true
   })
   .controls() // And turn on default input controls and touch input (for UI)
   .touch()
-
-  Q.options = {
-    imagePath: "assets/img/",
-    audioPath: "assets/audio/",
-    dataPath:  "assets/json/"
-  };
+  .enableSound();
 
   Q.animations('player', {
-    run_left: { frames: [0,1,2,3], next: 'stand_left', rate: 1/10},
-    run_right: { frames: [0,1,2,3], next: 'stand_right', rate: 1/10},
-    stand_left: { frames: [0]},
-    stand_right: { frames: [0]},
-    jump: { frames: [1], loop:false, rate: 1},
+    run_left: { frames: [4,5,6,7,8], next: 'stand_left', rate: 1/20},
+    run_right: { frames: [4,5,6,7,8], next: 'stand_right', rate: 1/20},
+    stand_left: { frames: [0,1,2,3,4], rate: 1/10},
+    stand_right: { frames: [0,1,2,3,4], rate: 1/10},
+    jump: { frames: [9], loop:false, rate: 1},
   });
 
   // ## Player Sprite
@@ -103,10 +119,10 @@ window.addEventListener("load",function() {
   Q.Sprite.extend("Player",{
     isAlive: true,
     // the init constructor is called on creation
-    init: function(p) {
+    init: function(name) {
       // You can call the parent's constructor with this._super(..)
-      this._super(p, {
-        sheet: "player:"+p,  // Setting a sprite sheet sets sprite width and height
+      this._super(name, {
+        sheet: "player:"+name,  // Setting a sprite sheet sets sprite width and height
         sprite: "player",   // Animationsheet
         x: 400,           // You can also set additional properties that can
         y: 100,             // be overridden on object creation
@@ -128,7 +144,7 @@ window.addEventListener("load",function() {
         // Check the collision, if it's the Tower, you win!
         if(collision.obj.isA("Tower")) {
           win = true;
-          Q.stageScene("endGame",1, { label: "Gagné !" }); 
+          Q.stageScene("endGame",1, { label: winLabel }); 
           this.destroy();
         }
       });
@@ -170,10 +186,13 @@ window.addEventListener("load",function() {
 
       // Listen for a sprite collision, if it's the player,
       // end the game unless the enemy is hit on top
-      this.on("bump.left,bump.right,bump.bottom",function(collision) {
+      this.on("bump.left,bump.right",function(collision) {
         if(collision.obj.isA("Player")) {
-          chrono.minTime(2000)
-          // Q.stageScene("endGame",1, { label: "Game Over" }); 
+          chrono.decTime(2000)
+          if (score >= 5) {
+            score -= 5;
+          }
+          // Q.stageScene("endGame",1, { label: loseLabel }); 
           // collision.obj.destroy();
           // chrono.Timer.toggle();
         }
@@ -185,18 +204,25 @@ window.addEventListener("load",function() {
         if(collision.obj.isA("Player")) { 
           this.destroy();
           collision.obj.p.vy = -300;
-          chrono.addTime(4000);
+          chrono.incTime(4000);
+          score += 10;
+          Qenemy.addEnemy();
         }
       });
+    }, addEnemy : function(){
+      Q.stage().insert(new Q.Enemy({ x: Math.floor(Math.random()*(900-100+1)+100), y: 0 }));
     }
   });
 
   // ## Level1 scene
   // Create a new scene called level 1
   Q.scene("level1",function(stage) {
+    period = 'prehistory';
+    // Play audio ambiance
+    Q.audio.play(period+'.mp3',{ loop: true });
 
     // Add in a repeater for a little parallax action
-    stage.insert(new Q.Repeater({ asset: "background/prehistory.png"}));
+    stage.insert(new Q.Repeater({ asset: 'background/'+period+'.png'}));
 
     // Add in a tile layer, and make it the collision layer
     stage.collisionLayer(new Q.TileLayer({
@@ -204,24 +230,28 @@ window.addEventListener("load",function() {
      sheet:     'tiles' }));
 
     // Create the player and add them to the stage
-    player = stage.insert(new Q.Player("prehistory"));
+    Qplayer = stage.insert(new Q.Player(period));
 
     // Give the stage a moveable viewport and tell it
     // to follow the player.
     //stage.add("viewport").follow(player);
 
     // Add in a couple of enemies
-    stage.insert(new Q.Enemy({ x: 700, y: 0 }));
+    Qenemy = stage.insert(new Q.Enemy({ x: 700, y: 0 }));
     stage.insert(new Q.Enemy({ x: 800, y: 0 }));
+    stage.insert(new Q.Enemy({ x: 900, y: 0 }));
 
     // Finally add in the tower goal
     stage.insert(new Q.Tower({ x: 71, y: 501 }));
   });
 
   Q.scene("level2",function(stage) {
+    period = 'middle_age';
+    // Play audio ambiance
+    Q.audio.play(period+'.mp3',{ loop: true });
 
     // Add in a repeater for a little parallax action
-    stage.insert(new Q.Repeater({ asset: "background/middle_age.png"}));
+    stage.insert(new Q.Repeater({ asset: 'background/'+period+'.png'}));
 
     // Add in a tile layer, and make it the collision layer
     stage.collisionLayer(new Q.TileLayer({
@@ -229,19 +259,17 @@ window.addEventListener("load",function() {
      sheet:     'tiles' }));
 
     // Create the player and add them to the stage
-    player = stage.insert(new Q.Player("middle_age"));
+    Qplayer = stage.insert(new Q.Player(period));
 
     // Give the stage a moveable viewport and tell it
     // to follow the player.
     //stage.add("viewport").follow(player);
 
     // Add in a couple of enemies
-    stage.insert(new Q.Enemy({ x: 700, y: 0 }));
+    Qenemy = stage.insert(new Q.Enemy({ x: 700, y: 0 }));
     stage.insert(new Q.Enemy({ x: 750, y: 0 }));
     stage.insert(new Q.Enemy({ x: 800, y: 0 }));
-    stage.insert(new Q.Enemy({ x: 200, y: 0 }));
     stage.insert(new Q.Enemy({ x: 400, y: 0 }));
-    stage.insert(new Q.Enemy({ x: 500, y: 0 }));
 
 
     // Finally add in the tower goal
@@ -249,9 +277,12 @@ window.addEventListener("load",function() {
   });
 
   Q.scene("level3",function(stage) {
+    period = 'renaissance';
+    // Play audio ambiance
+    Q.audio.play(period+'.mp3',{ loop: true });
 
     // Add in a repeater for a little parallax action
-    stage.insert(new Q.Repeater({ asset: "background/renaissance.png"}));
+    stage.insert(new Q.Repeater({ asset: 'background/'+period+'.png'}));
 
     // Add in a tile layer, and make it the collision layer
     stage.collisionLayer(new Q.TileLayer({
@@ -259,14 +290,46 @@ window.addEventListener("load",function() {
      sheet:     'tiles' }));
 
     // Create the player and add them to the stage
-    player = stage.insert(new Q.Player());
+    Qplayer = stage.insert(new Q.Player(period));
 
     // Give the stage a moveable viewport and tell it
     // to follow the player.
     //stage.add("viewport").follow(player);
 
     // Add in a couple of enemies
-    stage.insert(new Q.Enemy({ x: 700, y: 0 }));
+    Qenemy = stage.insert(new Q.Enemy({ x: 700, y: 0 }));
+    stage.insert(new Q.Enemy({ x: 750, y: 0 }));
+    stage.insert(new Q.Enemy({ x: 200, y: 0 }));
+    stage.insert(new Q.Enemy({ x: 400, y: 0 }));
+    stage.insert(new Q.Enemy({ x: 500, y: 0 }));
+
+
+    // Finally add in the tower goal
+    stage.insert(new Q.Tower({ x: 81, y: 501 }));
+  });
+
+Q.scene("level4",function(stage) {
+  period = "80's";
+    // Play audio ambiance
+    Q.audio.play(period+'.mp3',{ loop: true });
+
+    // Add in a repeater for a little parallax action
+    stage.insert(new Q.Repeater({ asset: 'background/'+period+'.png'}));
+
+    // Add in a tile layer, and make it the collision layer
+    stage.collisionLayer(new Q.TileLayer({
+     dataAsset: 'level.json',
+     sheet:     'tiles' }));
+
+    // Create the player and add them to the stage
+    Qplayer = stage.insert(new Q.Player(period));
+
+    // Give the stage a moveable viewport and tell it
+    // to follow the player.
+    //stage.add("viewport").follow(player);
+
+    // Add in a couple of enemies
+    Qenemy = stage.insert(new Q.Enemy({ x: 700, y: 0 }));
     stage.insert(new Q.Enemy({ x: 750, y: 0 }));
     stage.insert(new Q.Enemy({ x: 800, y: 0 }));
     stage.insert(new Q.Enemy({ x: 200, y: 0 }));
@@ -278,10 +341,13 @@ window.addEventListener("load",function() {
     stage.insert(new Q.Tower({ x: 81, y: 501 }));
   });
 
-  Q.scene("level4",function(stage) {
+Q.scene("level5",function(stage) {
+  period = 'futur';
+    // Play audio ambiance
+    Q.audio.play(period+'.mp3',{ loop: true });
 
     // Add in a repeater for a little parallax action
-    stage.insert(new Q.Repeater({ asset: "background/disco.png"}));
+    stage.insert(new Q.Repeater({ asset: 'background/'+period+'.png'}));
 
     // Add in a tile layer, and make it the collision layer
     stage.collisionLayer(new Q.TileLayer({
@@ -289,49 +355,20 @@ window.addEventListener("load",function() {
      sheet:     'tiles' }));
 
     // Create the player and add them to the stage
-    player = stage.insert(new Q.Player());
+    Qplayer = stage.insert(new Q.Player(period));
 
     // Give the stage a moveable viewport and tell it
     // to follow the player.
     //stage.add("viewport").follow(player);
 
     // Add in a couple of enemies
-    stage.insert(new Q.Enemy({ x: 700, y: 0 }));
+    Qenemy = stage.insert(new Q.Enemy({ x: 700, y: 0 }));
     stage.insert(new Q.Enemy({ x: 750, y: 0 }));
     stage.insert(new Q.Enemy({ x: 800, y: 0 }));
     stage.insert(new Q.Enemy({ x: 200, y: 0 }));
     stage.insert(new Q.Enemy({ x: 400, y: 0 }));
     stage.insert(new Q.Enemy({ x: 500, y: 0 }));
-
-
-    // Finally add in the tower goal
-    stage.insert(new Q.Tower({ x: 81, y: 501 }));
-  });
-
-  Q.scene("level5",function(stage) {
-
-    // Add in a repeater for a little parallax action
-    stage.insert(new Q.Repeater({ asset: "background/futur.png"}));
-
-    // Add in a tile layer, and make it the collision layer
-    stage.collisionLayer(new Q.TileLayer({
-     dataAsset: 'level.json',
-     sheet:     'tiles' }));
-
-    // Create the player and add them to the stage
-    player = stage.insert(new Q.Player());
-
-    // Give the stage a moveable viewport and tell it
-    // to follow the player.
-    //stage.add("viewport").follow(player);
-
-    // Add in a couple of enemies
-    stage.insert(new Q.Enemy({ x: 700, y: 0 }));
-    stage.insert(new Q.Enemy({ x: 750, y: 0 }));
-    stage.insert(new Q.Enemy({ x: 800, y: 0 }));
-    stage.insert(new Q.Enemy({ x: 200, y: 0 }));
-    stage.insert(new Q.Enemy({ x: 400, y: 0 }));
-    stage.insert(new Q.Enemy({ x: 500, y: 0 }));
+    stage.insert(new Q.Enemy({ x: 600, y: 0 }));
 
 
     // Finally add in the tower goal
@@ -343,29 +380,45 @@ window.addEventListener("load",function() {
   // to control the displayed message.
   Q.scene('endGame',function(stage) {
     chrono.Timer.toggle();
+
     var container = stage.insert(new Q.UI.Container({
       x: Q.width/2,
       y: Q.height/2,
       fill: "rgba(0,0,0,0.5)"
     }));
 
+    var actual_level = level;
+
     var restartLabel = '';
     if (level >= maxLevel) {
       restartLabel = 'Recommencer le jeu';
       level = 1;
       win = false;
+
+      $.ajax({
+        url: "../controller/scoreController.php",
+        method: "POST",
+        data: {
+          name: player_name,
+          score: score,
+          time: chrono.getCurrentTime
+        }
+      }).success(function(msg) {
+        // console.log(msg);
+      });
+
     } else if (win) {
       restartLabel = 'Niveau suivant';
       level++;
       win = false;
     } else {
       restartLabel = 'Recommencer le Niveau';
-      player.diePlayer();
     }
+    Qplayer.diePlayer();
 
     var restartButton = container.insert(new Q.UI.Button({
       x: 0,
-      y: 0,
+      y: 25,
       fill: "#CCCCCC",
       label: restartLabel
     }))
@@ -373,18 +426,26 @@ window.addEventListener("load",function() {
     var label = container.insert(new Q.UI.Text({
       x: 4,
       y: -20 - restartButton.p.h, 
-      label: stage.options.label,
+      label: stage.options.label+'\nNiveau : '+actual_level+'  Score : '+score,
       color: "#FFF"
     }));
+
     var menuButton = container.insert(new Q.UI.Button({
       x: 0,
       y: 20 + label.p.h, 
       fill: "#CCCCCC",
       label: "Menu"
-    }))  
+    }))
+
+    if (restartLabel == 'Recommencer le jeu') {
+      score = 0;
+    }
     // When the button is clicked, clear all the stages
     // and restart the game.
     restartButton.on("click",function() {
+      if (stage.options.label == winLabel) {
+        Q.audio.stop(period+".mp3")
+      }
       Q.clearStages();
       if (level != 0) {
         Q.stageScene('level'+level);
@@ -394,11 +455,11 @@ window.addEventListener("load",function() {
     });
 
     menuButton.on("click",function() {
-      window.location = location.protocol + '//' + location.host + location.pathname;
+      window.parent.location = (location.protocol + '//' + location.host + location.pathname).replace('view/gameframe.html', '');
     });
 
     // Expand the container to visibily fit it's contents
-    // (with a padding of 20 pixels)
+    // (with a padding of 30 pixels)
     container.fit(30);
   });
 
@@ -406,20 +467,27 @@ window.addEventListener("load",function() {
   // Q.load can be called at any time to load additional assets
   // assets that are already loaded will be skipped
   // The callback will be triggered when everything is loaded
-  Q.load("sprites.png, sprites.json, hero/prehistory.png, hero/middle_age.png, level.json, tiles.png, background/prehistory.png, background/middle_age.png, background/renaissance.png, background/disco.png, background/futur.png", function() {
+  Q.load("sprites.png, sprites.json, level.json, tiles.png, hero/prehistory.png, hero/middle_age.png, hero/renaissance.png, hero/80's.png, hero/futur.png, background/prehistory.png, background/middle_age.png, background/renaissance.png, background/80's.png, background/futur.png, prehistory.mp3, prehistory.ogg, middle_age.mp3, middle_age.ogg, renaissance.mp3, renaissance.ogg, 80's.mp3, 80's.ogg, futur.mp3, futur.ogg", function() {
     // Sprites sheets can be created manually
     Q.sheet("tiles","tiles.png", { tilew: 32, tileh: 32 });
 
     // Or from a .json asset that defines sprite locations
     Q.compileSheets("sprites.png","sprites.json");
-    Q.sheet("player:prehistory","hero/prehistory.png", { "tilew": 390, "tileh": 850,"sx": 0,"sy": 0});
-    Q.sheet("player:middle_age","hero/middle_age.png", { "tilew": 201, "tileh": 300,"sx": 0,"sy": 0});
+    Q.sheet("player:prehistory","hero/prehistory.png", { "tilew": 368, "tileh": 552,"sx": 0,"sy": 0});
+    Q.sheet("player:middle_age","hero/middle_age.png", { "tilew": 368, "tileh": 552,"sx": 0,"sy": 0});
+    Q.sheet("player:renaissance","hero/renaissance.png", { "tilew": 368, "tileh": 552,"sx": 0,"sy": 0});
+    Q.sheet("player:80's","hero/80's.png", { "tilew": 368, "tileh": 552,"sx": 0,"sy": 0});
+    Q.sheet("player:futur","hero/futur.png", { "tilew": 368, "tileh": 552,"sx": 0,"sy": 0});
 
     // Q.sheet("enemy:prehistory1","hero/moveL.gif", { "tilew": 111, "tileh": 160,"sx": 0,"sy": 0);
 
+    // Q.preload("80's", [ "80's.mp3", "80's.ogg" ]);
+
     // Finally, call stageScene to run the game
     Q.stageScene('level'+level);
-  });
 
+    chrono.resetCountdown();
+    chrono.Timer.toggle();
+  });
 });
 });

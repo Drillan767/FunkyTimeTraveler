@@ -12,6 +12,8 @@ $(document).ready(function () {
 
     $('a[name=creditos]').click(function (e) {
         e.preventDefault();
+        $('#menu audio')[0].pause();
+        $('#credits audio')[0].play();
         
         var maskHeight = $(document).height();
         var maskWidth = $(window).width();
@@ -36,6 +38,8 @@ $(document).ready(function () {
                 $('#titles').fadeOut();
                 $('.window').fadeOut();
                 $('#credits').css("bottom", "-" + (maskHeight * 2) + "px");
+                $('#credits audio')[0].pause();
+                $('#menu audio')[0].play();
             },
             step: function (n, t) {
                 var pos = $(this).position();
@@ -56,5 +60,7 @@ $(document).ready(function () {
         $(this).hide();
         $('#credits').css("bottom", "-" + ($(document).height() * 2) + "px");
         $('.window').hide();
+        $('#credits audio')[0].pause();
+        $('#menu audio')[0].play();
     });
 });

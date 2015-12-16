@@ -7,40 +7,42 @@
 
 html, body {
 	height: 100%;
+	background-color: grey;
 }
 
 body {
-  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
-  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
-  display: -ms-flexbox;      /* TWEENER - IE 10 */
-  display: -webkit-flex;     /* NEW - Chrome */
-  display: flex; 
-  -webkit-flex-direction:column;
-  -webkit-justify-content: center;
-  color: white;
+	display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+	display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+	display: -ms-flexbox;      /* TWEENER - IE 10 */
+	display: -webkit-flex;     /* NEW - Chrome */
+	display: flex; 
+	-webkit-flex-direction:column;
+	-webkit-justify-content: center;
+	color: white;
 }
 
-body#page_game {
-	display: block;
+iframe {
+	border: none;
+}
+
+#menu,
+#title,
+iframe {
+  width: 1024px;
+  height: 600px;
+  background-color: black;
+  position: relative;
+  display: inline-block;
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 1);
+  -moz-box-shadow:    0px 0px 20px 0px rgba(0, 0, 0, 1);
+  box-shadow:         0px 0px 20px 0px rgba(0, 0, 0, 1);
+  overflow: hidden;
 }
 
 .container {
 	text-align: center;
 }
 
-body#page_game .container {
-	position: fixed;
-	top: 0px;
-	left: 0px;
-	z-index: 1;
-	text-align: left;
-}
-
-#quintus_container {
-	position: absolute !important;
-	top: 0px;
-}
-
 .clearfix {
-    clear: both;
+	clear: both;
 }

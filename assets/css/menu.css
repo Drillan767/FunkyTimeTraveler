@@ -20,20 +20,9 @@
   src: url('../font/dos.ttf');
 }
 
-#menu,
-#title{
-  min-width: 1200px;
-  min-height: 600px;
-  background-color: black;
-  position: relative;
-  display: inline-block;
-}
-
 #titre-regles{
   font-family:fips;
-  color:grey;
   font-size:0.5em;
-
 }
 
 #regles-content{
@@ -51,7 +40,7 @@
 }
 
 #menu-central{
-  float: left;
+  margin: 0px auto;
   width: 500px; 
   height: 600px;
   background: black;
@@ -70,17 +59,17 @@ a{
 }
 
 #flamme{
-  margin-left:180px;
-  margin-top:75px;
   position:absolute;
   z-index:1;
+  top: 80px;
+  left: 80px;
 }
 
 #flamme2{
-  margin-left:950px;
-  margin-top:75px;
   position:absolute;
   z-index:1;
+  top: 80px;
+  right: 80px;
 }
 
 #jouer{

@@ -12,7 +12,7 @@ require_once('config.php');
 	<meta name="author" content="<?php echo AUTHOR; ?>"/>
 	<meta name="description" content=""/>
 	<meta name="keywords" content="<?php echo SITE_NAME; ?>"/>
-	<link rel="icon" type="image/png" href="./assets/img/logo.png"/>
+	<link rel="icon" type="image/png" href="./assets/img/logo32x32.png"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
 	<meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -31,7 +31,7 @@ require_once('config.php');
 	<div class="container">
 		<?php
   	// require_once('view/header.php');
-		require_once('view/'.$page.'.html');
+		require_once('view/'.$page.'.php');
 		?>
 	</div>
 </body>

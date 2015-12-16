@@ -11,27 +11,6 @@ session_start();
 define('SITE_NAME', 'Funky Time Traveler');
 define('AUTHOR', 'The 5 stars');
 
-/**
- * Get the database connection
- * @return PDO
- */
-function getDb() {
-	try {
-		$database_type = 'mysql';
-		$dbhost = 'localhost';
-		$dbname = 'G4_infomedia';
-		$user = 'site';
-		$pwd = SITE_NAME;
-		$db = new PDO($database_type.':host='.$dbhost.';dbname='.$dbname.';charset=utf8', $user, $pwd);
-		// $db->exec('SET NAMES utf8');
-		$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-		return $db;
-	} catch (Exception $e) {
-		die('<br/>ERROR '.$e->getCode().' : '.$e->getMessage());
-		exit();
-	}
-}
-
 /* Set the language according to the browser */
 $lang_accept = array('fr', 'en');
 if (!isset($_SESSION['lang'])) {    
