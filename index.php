@@ -27,7 +27,7 @@ require_once('config.php');
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script src="./assets/js/jQuery.js" type="text/javascript"></script>
 </head>
-<body id="<?php echo $page; ?>">
+<body id="<?php echo 'page_'.$page; ?>">
 	<div class="container">
 		<?php
   	// require_once('view/header.php');

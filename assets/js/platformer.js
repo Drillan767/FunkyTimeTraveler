@@ -41,7 +41,9 @@ $(document).ready(function() {
   }
 
   window.addEventListener("load",function() {
+    var win = false;
     var level = 1;
+    var maxLevel = 5;
 
   // Set up an instance of the Quintus engine  and include
   // the Sprites, Scenes, Input and 2D module. The 2D module
@@ -93,7 +95,7 @@ $(document).ready(function() {
 
         // Check the collision, if it's the Tower, you win!
         if(collision.obj.isA("Tower")) {
-          level++;
+          win = true;
           Q.stageScene("endGame",1, { label: "Gagné !" }); 
           this.destroy();
         }
@@ -125,7 +127,7 @@ $(document).ready(function() {
       // Listen for a sprite collision, if it's the player,
       // end the game unless the enemy is hit on top
       this.on("bump.left,bump.right,bump.bottom",function(collision) {
-        if(collision.obj.isA("Player")) { 
+        if(collision.obj.isA("Player")) {
           Q.stageScene("endGame",1, { label: "Game Over" }); 
           collision.obj.destroy();
           chrono.Timer.toggle();
@@ -212,12 +214,26 @@ $(document).ready(function() {
       fill: "rgba(0,0,0,0.5)"
     }));
 
+    var restartLabel = '';
+    if (level >= maxLevel) {
+      restartLabel = 'Recommencer le jeu';
+      level = 1;
+      win = false;
+    } else if (win) {
+      restartLabel = 'Niveau suivant';
+      level++;
+      win = false;
+    } else {
+      restartLabel = 'Recommencer le Niveau';
+    }
+
     var restartButton = container.insert(new Q.UI.Button({
       x: 0,
       y: 0,
       fill: "#CCCCCC",
-      label: "Recommencer"
-    }))         
+      label: restartLabel
+    }))
+    
     var label = container.insert(new Q.UI.Text({
       x: 4,
       y: -20 - restartButton.p.h, 
@@ -245,7 +261,7 @@ $(document).ready(function() {
 
     // Expand the container to visibily fit it's contents
     // (with a padding of 20 pixels)
-    container.fit(20);
+    container.fit(30);
   });
 
   // ## Asset Loading and Game Launch
