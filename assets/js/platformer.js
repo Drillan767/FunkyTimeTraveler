@@ -1,49 +1,72 @@
 $(document).ready(function() {
-  //timer.js
+  
+  // Timer
   var chrono = new (function() {
-          // Stopwatch element on the page
-          var $stopwatch;
-          // Timer speed in milliseconds
-          var incrementTime = 70;
-          // Current timer position in milliseconds
-          var currentTime = 0;
-          // Start the timer
-          $(function() {
-            $stopwatch = $('#stopwatch');
-            chrono.Timer = $.timer(updateTimer, incrementTime, true);
-          });
+    // Stopwatch element on the page
+    var $countdown = $('#countdown');
+    // Timer speed in milliseconds
+    var incrementTime = 70;
+    // Current timer position in milliseconds
+    var currentTime = 10000; // 10s
 
-          // Output time and increment
-          function updateTimer() {
-            var timeString = formatTime(currentTime);
-            $stopwatch.html(timeString);
-            currentTime += incrementTime;
-          }
-          // Reset timer
-          this.resetStopwatch = function() {
-            currentTime = 0;
-            chrono.Timer.stop().once();
-          };
-        });
+    $(function() {
+      // Setup the timer
+      chrono.Timer = $.timer(updateTimer, incrementTime, true);
+    });
+
+    function updateTimer() {
+      // Output timer position
+      var timeString = formatTime(currentTime);
+      $countdown.html(timeString);
+
+      // If timer is complete, trigger alert
+      if (currentTime == 0) {
+        chrono.Timer.stop();
+        win = false;
+        Q.stageScene("endGame",1, { label: "Game Over" });
+        return;
+      }
+
+      // Increment timer position
+      currentTime -= incrementTime;
+      if (currentTime < 0) currentTime = 0;
+    }
+
+    this.resetCountdown = function() {
+        currentTime = 10000;
+
+        // Stop and reset timer
+        chrono.Timer.stop().once();
+    };
+
+    this.minTime = function(milliseconds){
+      currentTime -= milliseconds;
+    };
+
+    this.addTime = function(milliseconds){
+      currentTime += milliseconds;
+    }
+  });
 
 
-  function pad(number, length) {
-    var str = '' + number;
-    while (str.length < length) {str = '0' + str;}
-    return str;
-  }
-  function formatTime(time) {
-    time = time / 10;
-    var min = parseInt(time / 6000),
-    sec = parseInt(time / 100) - (min * 60),
-    hundredths = pad(time - (sec * 100) - (min * 6000), 2);
-    return (min > 0 ? pad(min, 2) : "00") + ":" + pad(sec, 2) + ":" + hundredths;
-  }
+function pad(number, length) {
+  var str = '' + number;
+  while (str.length < length) {str = '0' + str;}
+  return str;
+}
 
-  window.addEventListener("load",function() {
-    var win = false;
-    var level = 1;
-    var maxLevel = 5;
+function formatTime(time) {
+  time = time / 10;
+  var min = parseInt(time / 6000),
+  sec = parseInt(time / 100) - (min * 60),
+  hundredths = pad(time - (sec * 100) - (min * 6000), 2);
+  return (min > 0 ? pad(min, 2) : "00") + ":" + pad(sec, 2) + ":" + hundredths;
+}
+
+window.addEventListener("load",function() {
+  var win = false;
+  var level = 1;
+  var maxLevel = 5;
 
   // Set up an instance of the Quintus engine  and include
   // the Sprites, Scenes, Input and 2D module. The 2D module
@@ -100,9 +123,7 @@ $(document).ready(function() {
           this.destroy();
         }
       });
-
     }
-
   });
 
 
@@ -128,9 +149,10 @@ $(document).ready(function() {
       // end the game unless the enemy is hit on top
       this.on("bump.left,bump.right,bump.bottom",function(collision) {
         if(collision.obj.isA("Player")) {
-          Q.stageScene("endGame",1, { label: "Game Over" }); 
-          collision.obj.destroy();
-          chrono.Timer.toggle();
+          chrono.minTime(2000)
+          // Q.stageScene("endGame",1, { label: "Game Over" }); 
+          // collision.obj.destroy();
+          // chrono.Timer.toggle();
         }
       });
 
@@ -140,6 +162,7 @@ $(document).ready(function() {
         if(collision.obj.isA("Player")) { 
           this.destroy();
           collision.obj.p.vy = -300;
+          chrono.addTime(4000);
         }
       });
     }
@@ -160,6 +183,10 @@ $(document).ready(function() {
 
     // Create the player and add them to the stage
     var player = stage.insert(new Q.Player());
+
+    diePlayer = function() {
+      player.destroy();
+    }
 
     // Give the stage a moveable viewport and tell it
     // to follow the player.
@@ -204,10 +231,104 @@ $(document).ready(function() {
     stage.insert(new Q.Tower({ x: 81, y: 501 }));
   });
 
+  Q.scene("level3",function(stage) {
+
+    // Add in a repeater for a little parallax action
+    stage.insert(new Q.Repeater({ asset: "background/renaissance.png"}));
+
+    // Add in a tile layer, and make it the collision layer
+    stage.collisionLayer(new Q.TileLayer({
+     dataAsset: 'level.json',
+     sheet:     'tiles' }));
+
+
+    // Create the player and add them to the stage
+    var player = stage.insert(new Q.Player());
+
+    // Give the stage a moveable viewport and tell it
+    // to follow the player.
+    //stage.add("viewport").follow(player);
+
+    // Add in a couple of enemies
+    stage.insert(new Q.Enemy({ x: 700, y: 0 }));
+    stage.insert(new Q.Enemy({ x: 750, y: 0 }));
+    stage.insert(new Q.Enemy({ x: 800, y: 0 }));
+    stage.insert(new Q.Enemy({ x: 200, y: 0 }));
+    stage.insert(new Q.Enemy({ x: 400, y: 0 }));
+    stage.insert(new Q.Enemy({ x: 500, y: 0 }));
+
+
+    // Finally add in the tower goal
+    stage.insert(new Q.Tower({ x: 81, y: 501 }));
+  });
+
+  Q.scene("level4",function(stage) {
+
+    // Add in a repeater for a little parallax action
+    stage.insert(new Q.Repeater({ asset: "background/disco.png"}));
+
+    // Add in a tile layer, and make it the collision layer
+    stage.collisionLayer(new Q.TileLayer({
+     dataAsset: 'level.json',
+     sheet:     'tiles' }));
+
+
+    // Create the player and add them to the stage
+    var player = stage.insert(new Q.Player());
+
+    // Give the stage a moveable viewport and tell it
+    // to follow the player.
+    //stage.add("viewport").follow(player);
+
+    // Add in a couple of enemies
+    stage.insert(new Q.Enemy({ x: 700, y: 0 }));
+    stage.insert(new Q.Enemy({ x: 750, y: 0 }));
+    stage.insert(new Q.Enemy({ x: 800, y: 0 }));
+    stage.insert(new Q.Enemy({ x: 200, y: 0 }));
+    stage.insert(new Q.Enemy({ x: 400, y: 0 }));
+    stage.insert(new Q.Enemy({ x: 500, y: 0 }));
+
+
+    // Finally add in the tower goal
+    stage.insert(new Q.Tower({ x: 81, y: 501 }));
+  });
+
+  Q.scene("level5",function(stage) {
+
+    // Add in a repeater for a little parallax action
+    stage.insert(new Q.Repeater({ asset: "background/futur.png"}));
+
+    // Add in a tile layer, and make it the collision layer
+    stage.collisionLayer(new Q.TileLayer({
+     dataAsset: 'level.json',
+     sheet:     'tiles' }));
+
+
+    // Create the player and add them to the stage
+    var player = stage.insert(new Q.Player());
+
+    // Give the stage a moveable viewport and tell it
+    // to follow the player.
+    //stage.add("viewport").follow(player);
+
+    // Add in a couple of enemies
+    stage.insert(new Q.Enemy({ x: 700, y: 0 }));
+    stage.insert(new Q.Enemy({ x: 750, y: 0 }));
+    stage.insert(new Q.Enemy({ x: 800, y: 0 }));
+    stage.insert(new Q.Enemy({ x: 200, y: 0 }));
+    stage.insert(new Q.Enemy({ x: 400, y: 0 }));
+    stage.insert(new Q.Enemy({ x: 500, y: 0 }));
+
+
+    // Finally add in the tower goal
+    stage.insert(new Q.Tower({ x: 81, y: 501 }));
+  });
+
   // To display a game over / game won popup box, 
   // create a endGame scene that takes in a `label` option
   // to control the displayed message.
   Q.scene('endGame',function(stage) {
+    chrono.Timer.toggle();
     var container = stage.insert(new Q.UI.Container({
       x: Q.width/2,
       y: Q.height/2,
@@ -225,6 +346,7 @@ $(document).ready(function() {
       win = false;
     } else {
       restartLabel = 'Recommencer le Niveau';
+      diePlayer();
     }
 
     var restartButton = container.insert(new Q.UI.Button({
@@ -253,6 +375,8 @@ $(document).ready(function() {
       if (level != 0) {
         Q.stageScene('level'+level);
       }
+      chrono.resetCountdown();
+      chrono.Timer.toggle();
     });
 
     menuButton.on("click",function() {
