@@ -20,11 +20,30 @@
   src: url('../font/dos.ttf');
 }
 
-#menu{
-  min-width: 1205px;
-  position: absolute; 
-  left: 50%; 
-  margin-left: -600px; 
+#menu,
+#title{
+  min-width: 1200px;
+  min-height: 600px;
+  background-color: black;
+  position: relative;
+  display: inline-block;
+}
+
+#titre-regles{
+  font-family:fips;
+  color:grey;
+  font-size:0.5em;
+
+}
+
+#regles-content{
+  margin-top:90px;
+  margin-left:40px;
+  font-family:dos;
+  text-align: justify;
+  color:white;
+  font-size:1.4em;
+  width:1130px;
 }
 
 #menu-gauche{
@@ -50,16 +69,14 @@ a{
   color: white; 
 }
 
-#flamme
-{
+#flamme{
   margin-left:180px;
   margin-top:75px;
   position:absolute;
   z-index:1;
 }
 
-#flamme2
-{
+#flamme2{
   margin-left:950px;
   margin-top:75px;
   position:absolute;
@@ -89,7 +106,6 @@ a{
   font-size:20px; 
   color:skyblue;
 }
-
 /*------------Titre------------------*/
 p {
   text-align: center;
@@ -105,7 +121,7 @@ a {
 }
 
 .big-titre:nth-child(1) a {
-  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
+  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px rgb(65, 17, 255), 0 0 70px #6D11FF, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
   color:grey;
   font-size:8em;
   font-family: "choco";
@@ -140,12 +156,13 @@ a {
   font-size: 25px;
   color:grey;
 }
-h4 {
+
+h4{
   font-family: "fips";
   position: absolute;
   color: white; 
-  top: 87px; 
-  left: 435px;
+  top: 90px; 
+  left:430px;
   font-size: 20px;
   color:grey;
 }
