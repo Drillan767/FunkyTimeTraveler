@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  
+  var player = null;
   // Timer
   var chrono = new (function() {
     // Stopwatch element on the page
@@ -20,11 +20,13 @@ $(document).ready(function() {
       $countdown.html(timeString);
 
       // If timer is complete, trigger alert
-      if (currentTime == 0) {
+      if (currentTime == 0  && player.isAlive) {
         chrono.Timer.stop();
         win = false;
         Q.stageScene("endGame",1, { label: "Game Over" });
-        return;
+      }
+      if (currentTime > 8000 && currentTime < 8200) {
+        Q.stage().insert(new Q.Enemy({x:700, y:0}));
       }
 
       // Increment timer position
@@ -33,20 +35,20 @@ $(document).ready(function() {
     }
 
     this.resetCountdown = function() {
-        currentTime = 10000;
+      currentTime = 10000;
 
         // Stop and reset timer
         chrono.Timer.stop().once();
-    };
+      };
 
-    this.minTime = function(milliseconds){
-      currentTime -= milliseconds;
-    };
+      this.minTime = function(milliseconds){
+        currentTime -= milliseconds;
+      };
 
-    this.addTime = function(milliseconds){
-      currentTime += milliseconds;
-    }
-  });
+      this.addTime = function(milliseconds){
+        currentTime += milliseconds;
+      }
+    });
 
 
 function pad(number, length) {
@@ -73,34 +75,42 @@ window.addEventListener("load",function() {
   // includes the `TileLayer` class as well as the `2d` componet.
   var Q = window.Q = Quintus()
   .include("Sprites, Scenes, Input, 2D, Anim, Touch, UI")
-          // Maximize this game to whatever the size of the browser is
-          .setup({
-            width: 1024,
-            height: 600,
-            maximize: "touch"
-          })
-          // And turn on default input controls and touch input (for UI)
-          .controls().touch()
+  .setup({
+    width: 1024,
+    height: 600,
+    maximize: "touch" // Maximize this game for touch screen
+  })
+  .controls() // And turn on default input controls and touch input (for UI)
+  .touch()
 
-          Q.options = {
-            imagePath: "assets/img/",
-            audioPath: "assets/audio/",
-            dataPath:  "assets/json/"
-          };
+  Q.options = {
+    imagePath: "assets/img/",
+    audioPath: "assets/audio/",
+    dataPath:  "assets/json/"
+  };
+
+  Q.animations('player', {
+    run_left: { frames: [0,1,2,3], next: 'stand_left', rate: 1/10},
+    run_right: { frames: [0,1,2,3], next: 'stand_right', rate: 1/10},
+    stand_left: { frames: [0]},
+    stand_right: { frames: [0]},
+    jump: { frames: [1], loop:false, rate: 1},
+  });
 
   // ## Player Sprite
   // The very basic player sprite, this is just a normal sprite
   // using the player sprite sheet with default controls added to it.
   Q.Sprite.extend("Player",{
-
+    isAlive: true,
     // the init constructor is called on creation
     init: function(p) {
-
       // You can call the parent's constructor with this._super(..)
       this._super(p, {
-        sheet: "player",  // Setting a sprite sheet sets sprite width and height
-        x: 410,           // You can also set additional properties that can
-        y: 90             // be overridden on object creation
+        sheet: "player:"+p,  // Setting a sprite sheet sets sprite width and height
+        sprite: "player",   // Animationsheet
+        x: 400,           // You can also set additional properties that can
+        y: 100,             // be overridden on object creation
+        scale: 0.2,        // scale sprite to right size
       });
 
       // Add in pre-made components to get up and running quickly
@@ -110,12 +120,11 @@ window.addEventListener("load",function() {
       // default input actions (left, right to move,  up or action to jump)
       // It also checks to make sure the player is on a horizontal surface before
       // letting them jump.
-      this.add('2d, platformerControls');
+      this.add("2d, platformerControls, animation");
 
       // Write event handlers to respond hook into behaviors.
       // hit.sprite is called everytime the player collides with a sprite
       this.on("hit.sprite",function(collision) {
-
         // Check the collision, if it's the Tower, you win!
         if(collision.obj.isA("Tower")) {
           win = true;
@@ -123,9 +132,23 @@ window.addEventListener("load",function() {
           this.destroy();
         }
       });
+    }, step: function(p) {
+      if(Q.inputs['up']) {
+        this.play("jump",1);
+      } else if(this.p.vx > 0) {
+        this.p.flip="";
+        this.play("run_right");
+      } else if(this.p.vx < 0) {
+        this.p.flip="x";
+        this.play("run_left");
+      } else {
+        this.play("stand_" + this.p.direction);
+      }
+    }, diePlayer: function() {
+      this.destroy();
+      this.isAlive = false;
     }
   });
-
 
   // ## Tower Sprite
   // Sprites can be simple, the Tower sprite just sets a custom sprite sheet
@@ -180,13 +203,8 @@ window.addEventListener("load",function() {
      dataAsset: 'level.json',
      sheet:     'tiles' }));
 
-
     // Create the player and add them to the stage
-    var player = stage.insert(new Q.Player());
-
-    diePlayer = function() {
-      player.destroy();
-    }
+    player = stage.insert(new Q.Player("prehistory"));
 
     // Give the stage a moveable viewport and tell it
     // to follow the player.
@@ -210,9 +228,8 @@ window.addEventListener("load",function() {
      dataAsset: 'level.json',
      sheet:     'tiles' }));
 
-
     // Create the player and add them to the stage
-    var player = stage.insert(new Q.Player());
+    player = stage.insert(new Q.Player("middle_age"));
 
     // Give the stage a moveable viewport and tell it
     // to follow the player.
@@ -241,9 +258,8 @@ window.addEventListener("load",function() {
      dataAsset: 'level.json',
      sheet:     'tiles' }));
 
-
     // Create the player and add them to the stage
-    var player = stage.insert(new Q.Player());
+    player = stage.insert(new Q.Player());
 
     // Give the stage a moveable viewport and tell it
     // to follow the player.
@@ -272,9 +288,8 @@ window.addEventListener("load",function() {
      dataAsset: 'level.json',
      sheet:     'tiles' }));
 
-
     // Create the player and add them to the stage
-    var player = stage.insert(new Q.Player());
+    player = stage.insert(new Q.Player());
 
     // Give the stage a moveable viewport and tell it
     // to follow the player.
@@ -303,9 +318,8 @@ window.addEventListener("load",function() {
      dataAsset: 'level.json',
      sheet:     'tiles' }));
 
-
     // Create the player and add them to the stage
-    var player = stage.insert(new Q.Player());
+    player = stage.insert(new Q.Player());
 
     // Give the stage a moveable viewport and tell it
     // to follow the player.
@@ -346,7 +360,7 @@ window.addEventListener("load",function() {
       win = false;
     } else {
       restartLabel = 'Recommencer le Niveau';
-      diePlayer();
+      player.diePlayer();
     }
 
     var restartButton = container.insert(new Q.UI.Button({
@@ -392,12 +406,16 @@ window.addEventListener("load",function() {
   // Q.load can be called at any time to load additional assets
   // assets that are already loaded will be skipped
   // The callback will be triggered when everything is loaded
-  Q.load("sprites.png, sprites.json, level.json, tiles.png, background/prehistory.png, background/middle_age.png, background/renaissance.png, background/disco.png, background/futur.png", function() {
+  Q.load("sprites.png, sprites.json, hero/prehistory.png, hero/middle_age.png, level.json, tiles.png, background/prehistory.png, background/middle_age.png, background/renaissance.png, background/disco.png, background/futur.png", function() {
     // Sprites sheets can be created manually
     Q.sheet("tiles","tiles.png", { tilew: 32, tileh: 32 });
 
     // Or from a .json asset that defines sprite locations
     Q.compileSheets("sprites.png","sprites.json");
+    Q.sheet("player:prehistory","hero/prehistory.png", { "tilew": 390, "tileh": 850,"sx": 0,"sy": 0});
+    Q.sheet("player:middle_age","hero/middle_age.png", { "tilew": 201, "tileh": 300,"sx": 0,"sy": 0});
+
+    // Q.sheet("enemy:prehistory1","hero/moveL.gif", { "tilew": 111, "tileh": 160,"sx": 0,"sy": 0);
 
     // Finally, call stageScene to run the game
     Q.stageScene('level'+level);
