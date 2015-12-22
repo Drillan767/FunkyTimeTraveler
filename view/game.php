@@ -1,1 +1,1 @@
-<iframe src="./view/gameframe.html" width="1024" height="600" border="0"></iframe>
+<iframe src="./view/gameframe.php" width="1024" height="600" border="0"></iframe>

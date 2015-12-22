@@ -11,36 +11,37 @@ html, body {
 }
 
 body {
-	display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
-	display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
-	display: -ms-flexbox;      /* TWEENER - IE 10 */
-	display: -webkit-flex;     /* NEW - Chrome */
-	display: flex; 
-	-webkit-flex-direction:column;
-	-webkit-justify-content: center;
+	display: table;
+	width: 100%;
 	color: white;
 }
 
-iframe {
+iframe, img {
 	border: none;
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;      /* IE 10+ */
+	user-select: none;
 }
 
 #menu,
 #title,
 iframe {
-  width: 1024px;
-  height: 600px;
-  background-color: black;
-  position: relative;
-  display: inline-block;
-  -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 1);
-  -moz-box-shadow:    0px 0px 20px 0px rgba(0, 0, 0, 1);
-  box-shadow:         0px 0px 20px 0px rgba(0, 0, 0, 1);
-  overflow: hidden;
+	width: 1024px;
+	height: 600px;
+	background-color: black;
+	position: relative;
+	display: inline-block;
+	-webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 1);
+	-moz-box-shadow:    0px 0px 20px 0px rgba(0, 0, 0, 1);
+	box-shadow:         0px 0px 20px 0px rgba(0, 0, 0, 1);
+	overflow: hidden;
 }
 
 .container {
 	text-align: center;
+	display: table-cell;
+	vertical-align: middle;
 }
 
 .clearfix {

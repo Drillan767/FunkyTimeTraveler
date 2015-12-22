@@ -1,5 +1,4 @@
 <?php //Website configuration file
-
 ini_set('display_errors', 1); 
 error_reporting(E_ALL);
 
@@ -10,6 +9,7 @@ session_start();
 
 define('SITE_NAME', 'Funky Time Traveler');
 define('AUTHOR', 'The 5 stars');
+define('VERSION', '1.1');
 
 /* Set the language according to the browser */
 $lang_accept = array('fr', 'en');
@@ -18,6 +18,10 @@ if (!isset($_SESSION['lang'])) {
 	if ($_SESSION['lang'] != 'fr') {
 		$_SESSION['lang'] = 'en';
 	}
+}
+
+if (!isset($_SESSION['sound'])) {    
+	$_SESSION['sound'] = 'on';
 }
 
 /**

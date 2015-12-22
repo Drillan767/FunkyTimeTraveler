@@ -1,31 +1,27 @@
 <link href="./assets/css/menu.css" type="text/css" rel="stylesheet" media="all"/>
-<link href="./assets/css/endcredits.css" type="text/css" rel="stylesheet" media="all"/>
-
-<script src="./assets/js/endcredits.js" type="text/javascript"></script>
-
+<link href="./assets/css/credits.css" type="text/css" rel="stylesheet" media="all"/>
 <div id="menu">
-
-	<div id="flamme"><img src="./assets/img/flame.gif" width="70px" height="70px"/></div>
+	<img id="flamme" src="./assets/img/flame.gif"/>
+	<img id="mute" src="./assets/img/sound_<?php echo $_SESSION['sound']; ?>.png"/>
 	<div id="menu-central"> 
-
-		<span class="big-titre"><a href="#">Funky</a></span>
-		<h4>Time Traveler</h4><br>
-		<img src="./assets/img/hourglass.gif" width="85px" height="85px" style="padding-top: 20px;"/>
-		<div id="cadre-btn">
-
-			<div class="btn"> <a href="?page=game" id="jouer" >Commencer à jouer</a></div>
-			<div class="btn"> <a href="?page=rules" class="btn">Comment jouer</a></div>
-			<div class="btn"> <a href="?page=ranking" class="btn">Classements</a></div>
-			<div class="btn"> <a href="#creditos" name="creditos" class="btn">Crédits</a></div>
-			<span class="copyright">Copyright G4 LTD. 2015</span>
-
-		</div>
+		<h1>Funky</h1>
+		<h4>Time Traveler</h4>
+		<img id="hourglass" src="./assets/img/hourglass.gif"/>
+		<nav>
+			<ul>
+				<li id="play"><a href="?page=game">Commencer à jouer</a></li>
+				<li><a href="?page=rules">Comment jouer</a></li>
+				<li><a href="?page=ranking">Classements</a></li>
+				<li><a href="#creditos" name="creditos">Crédits</a></li>
+			</ul>
+		</nav>
+		<span class="copyright">Copyright G4 LTD. 2015</span>
 	</div>
-	<div id="flamme2"><img src="./assets/img/flame.gif" width="70px" height="70px"/></div>
-	<div class="clearfix"></div>
+	<img id="flamme2" src="./assets/img/flame.gif"/>
+	<p id="version">v<?php echo VERSION; ?></p>
 	<audio preload="auto" loop autoplay>
-		<source src="./assets/audio/main.ogg" type="audio/ogg"/>
-		<source src="./assets/audio/main.mp3" type="audio/mpeg"/>
+		<source src="./assets/audio/main.mp3" type="audio/mpeg">
+		<source src="./assets/audio/main.ogg" type="audio/ogg">
 	</audio>
 </div>
 
@@ -33,7 +29,6 @@
 <div id="titles">
 	<div id="credits">
 		<div id="the-end">Crédits</div>
-		<br />
 		<h1>Projet réalisé par l'équipe 5-stars</h1>
 		<dl>
 			<dt>Chef de projet</dt>
@@ -55,12 +50,18 @@
 			<dd>Alexis Allaoui</dd>
 			<dd>Adrien Grange</dd>
 			<dd>Jérémy Obrier</dd>
+			<dt>Crédits images/sons</dt>
+			<dd>Polices d'écriture : Dafont</dd>
+			<dd>Musiques : 8 Bit Universe</dd>
+			<dd>Images brutes : DeviantArt</dd>
 		</dl>
-
 		<h1>Copyright G4 2015</h1>
+		<img src="./assets/img/logocredits.png"/>
 		<audio preload="auto" loop>
-			<source src="./assets/audio/credits.ogg" type="audio/ogg"/>
 			<source src="./assets/audio/credits.mp3" type="audio/mpeg"/>
+			<source src="./assets/audio/credits.ogg" type="audio/ogg"/>
 		</audio>
 	</div>
 </div>
+<script src="./assets/js/main.js" type="text/javascript"></script>
+<script src="./assets/js/credits.js" type="text/javascript"></script>
