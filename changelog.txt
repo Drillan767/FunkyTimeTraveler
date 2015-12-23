@@ -8,6 +8,8 @@ NEW:
 - Web app capable
 - Add version number
 - Not displaying hack (tardis) if "hacked" parameter isn't set
+- OpenGraph API integration
+- Title depending on the page
 
 BIG FIXES:
 - Last level sound won't stop if you loose
