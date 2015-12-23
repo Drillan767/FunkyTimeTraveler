@@ -1,0 +1,27 @@
+-- CHANGELOG --
+
+22/12/2015 - v1.1
+-----------------
+NEW:
+- Mute option all over the website
+- Mobile compatible
+- Web app capable
+- Add version number
+- Not displaying hack (tardis) if "hacked" parameter isn't set
+- OpenGraph API integration
+- Title depending on the page
+
+BIG FIXES:
+- Last level sound won't stop if you loose
+- Locked keyboard after canceling JS prompt when entering pseudo
+- CSS title shadow animation and transition
+- Credits centered
+- Font compatibility
+- Browser compatibility (Safari, IE 9+, Edge, Chrome, Firefox)
+- Null name score
+- Reduice images and sound file size
+- Limit ranking to 15 best scores
+
+18/12/2015 - v1.0
+-----------------
+Initial release

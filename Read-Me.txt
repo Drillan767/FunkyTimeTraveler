@@ -1,0 +1,49 @@
+Funky Time Traveler(R) Version 1.0  18/12/2015
+
+GENERAL
+-------
+
+ * Funky Time Traveler(R) is a video game developed by G4 Institut's students.
+
+ * Funky Time Traveler(R) has a main charcter names Funky, he is a 80's dancer. Each time he dances
+   he travels around the time and space. Funky is playable in 5 period (prehistoric, middle ages, French renaissance, 80's, futur).
+
+ * Funky has some enemies, each time he kills an enemy he will increase is chrono and his score. Each time he will be hit by enemies
+   he will lose some time and points from his score. If he get 0 seconds funky is game over, if he reach 30 seconds funky go on the next level.
+
+REQUIREMENTS
+------------
+
+This module requires:
+
+ * A Php executor (WAMP/MAMP)
+or
+ * A Web Server
+
+INSTALLATION
+------------
+
+ * Unzip the archive 
+
+ * Copy the files
+
+ * Past in your www WAMP/MAMP's file or in your Server
+
+DEVELOPERS
+----------
+
+Devs :
+ * Paul DIALINAS - p.dialinas@gmail.com
+ * Alexis ALLAOUI
+ * Quentin POLLET
+ * Joseph LEVARATO
+ * Jeremy ORBIER
+ * Adrien GRANGE
+
+This project has been sponsored by:
+ * G4 Institut
+
+LICENCE
+-------
+
+ * Funky Time Traveler(R) is a full property of G4 Institut

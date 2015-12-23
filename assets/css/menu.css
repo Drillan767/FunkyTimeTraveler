@@ -1,116 +1,122 @@
 /* Polices */
-
 @font-face {
-  font-family: 'choco';
-  src: url('../font/choco.otf');
+  font-family: 'chocolate_dealer';
+  src: url('../font/chocolate_dealer.eot');
+  src: url('../font/chocolate_dealer.eot?#iefix') format('embedded-opentype'),
+  url('../font/chocolate_dealer.ttf') format('truetype'),
+  url('../font/chocolate_dealer.otf') format('opentype');
 }
 
 @font-face {
-  font-family: 'btrente';
-  src: url('../font/btrente.TTF');
-}
-
-@font-face {
-  font-family: 'fips';
-  src: url('../font/fips.otf');
+  font-family: 'fipps';
+  src: url('../font/fipps.eot');
+  src: url('../font/fipps.eot?#iefix') format('embedded-opentype'),
+  url('../font/fipps.ttf') format('truetype'),
+  url('../font/fipps.otf') format('opentype');
 }
 
 @font-face {
   font-family: 'dos';
-  src: url('../font/dos.ttf');
+  src: url('../font/dos.eot');
+  src: url('../font/dos.eot?#iefix') format('embedded-opentype'),
+  url('../font/dos.ttf') format('truetype');
 }
 
-#menu,
-#title{
-  min-width: 1200px;
-  min-height: 600px;
-  background-color: black;
-  position: relative;
-  display: inline-block;
+#title h1 {
+  font-family: 'fipps';
+  font-size: 30px;
+  margin: 20px;
 }
 
-#titre-regles{
-  font-family:fips;
-  color:grey;
-  font-size:0.5em;
-
-}
-
-#regles-content{
-  margin-top:90px;
-  margin-left:40px;
-  font-family:dos;
+#regles-content {
+  margin-top: 50px;
+  padding-left: 40px;
+  padding-right: 40px;
+  font-family:'dos';
   text-align: justify;
   color:white;
   font-size:1.4em;
-  width:1130px;
+  width:1024px;
 }
 
-#menu-gauche{
-  float: left;
+#backHome {
+  font-size: 16px;
+  position: absolute;
+  bottom: 20px;
+  display: block;
+  width: 100%;
 }
 
-#menu-central{
-  float: left;
+#menu-central {
+  margin: 0px auto;
   width: 500px; 
   height: 600px;
   background: black;
   text-align: center; 
 }
 
-#menu-droite{
-  float: left;
-}
-
-a{
-  text-decoration:none;
-  font-family: "fips";
-  font-size:0.7em;
-  color: white; 
-}
-
-#flamme{
-  margin-left:180px;
-  margin-top:75px;
+#flamme,
+#flamme2 {
   position:absolute;
-  z-index:1;
+  top: 80px;
+  left: 80px;
+  width: 70px;
+  height: 70px;
 }
 
-#flamme2{
-  margin-left:950px;
-  margin-top:75px;
-  position:absolute;
-  z-index:1;
+#flamme2 {
+  left: inherit;
+  right: 80px;
 }
 
-#jouer{
+#hourglass {
+ width:85px;
+ height:85px;
+ padding-top:20px;
+}
+
+nav {
+  margin-bottom:25px;
+}
+
+nav li {
+  list-style: none;
+  margin-top: 20px;
+  height: 50px;
+}
+
+nav li a {
+  font-size:20px; 
+}
+
+nav li:hover a {
+  color:skyblue;
+}
+
+nav li#play {
+  height: 76px; 
+}
+
+nav li#play a {
   font-size: 30px;  
 }
 
-#jouer:hover{
-  font-size: 30px;  
+nav li#play a:hover {
   color:purple;
 }
 
-#cadre-btn{
-  margin-top: -14px; 
+#mute,
+#version {
+  position: absolute;
+  bottom: 20px;
+  z-index: 10;
 }
-
-.btn{
-  margin-top: 20px;
-  font-size:20px; 
-}
-
-.btn:hover{
-  margin-top: 20px;
-  font-size:20px; 
-  color:skyblue;
-}
+#mute {left: 20px;}
+#version {right: 20px;}
 /*------------Titre------------------*/
 p {
   text-align: center;
-  font-size: 5em;
-  margin: 10px 0 20px 0;
+  font-family: 'dos';
 }
 
 a {
@@ -118,27 +124,51 @@ a {
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   transition: all 0.5s;
+  font-family: 'fipps';
+  font-size:0.7em;
+  color: white; 
 }
 
-.big-titre:nth-child(1) a {
+#menu-central h1 {
   text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px rgb(65, 17, 255), 0 0 70px #6D11FF, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
-  color:grey;
-  font-size:8em;
-  font-family: "choco";
-  -webkit-animation: neon1 1.5s ease-in-out infinite alternate;
-  -moz-animation: neon1 1.5s ease-in-out infinite alternate;
-  animation: neon1 1.5s ease-in-out infinite alternate;
+  color: grey;
+  font-size: 128px;
+  font-family: 'chocolate_dealer';
+  -webkit-animation: neon 1.5s ease-in-out infinite alternate;
+  -moz-animation: neon 1.5s ease-in-out infinite alternate;
+  animation: neon 1.5s ease-in-out infinite alternate;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
 }
 
-.big-titre:nth-child(1) a:hover {
+#menu-central h1:hover {
   color: #FF1177;
   -webkit-animation: none;
   -moz-animation: none;
   animation: none;
-}
-/*glow for mozilla*/
 
-@-moz-keyframes neon1 {
+}
+/* glow */
+@-webkit-keyframes neon {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF1177, 0 0 35px #FF1177, 0 0 40px #FF1177, 0 0 50px #FF1177, 0 0 75px #FF1177;
+  }
+}
+
+@-moz-keyframes neon {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF1177, 0 0 35px #FF1177, 0 0 40px #FF1177, 0 0 50px #FF1177, 0 0 75px #FF1177;
+  }
+}
+
+@keyframes neon {
   from {
     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
   }
@@ -148,21 +178,27 @@ a {
 }
 
 .copyright{
-  font-family: "dos";
-  position: absolute;
-  color: white; 
-  top: 560px; 
-  left:440px;
+  font-family: 'dos';
   font-size: 25px;
   color:grey;
+  position: absolute;
+  bottom: 20px;
+  left: 0px;
+  width: 100%;
 }
 
 h4{
-  font-family: "fips";
+  font-family: 'fipps';
   position: absolute;
-  color: white; 
   top: 90px; 
-  left:430px;
+  left:340px;
   font-size: 20px;
   color:grey;
+}
+
+/* Ranking */
+ol {
+  font-family: 'dos';
+  font-size: 28px;
+  list-style-position: inside;
 }
