@@ -1,49 +1,49 @@
 * {
-	margin: 0px;
-	padding: 0px;
-	/*max-width: 100%;*/
-	box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 html, body {
-	height: 100%;
-	background-color: grey;
+    height: 100%;
+    background-color: grey;
 }
 
 body {
-	display: table;
-	width: 100%;
-	color: white;
+    display: table;
+    width: 100%;
+    color: white;
 }
 
 iframe, img {
-	border: none;
-	-webkit-user-select: none;  /* Chrome all / Safari all */
-	-moz-user-select: none;     /* Firefox all */
-	-ms-user-select: none;      /* IE 10+ */
-	user-select: none;
+    border: none;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;
 }
 
 #menu,
 #title,
 iframe {
-	width: 1024px;
-	height: 600px;
-	background-color: black;
-	position: relative;
-	display: inline-block;
-	-webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 1);
-	-moz-box-shadow:    0px 0px 20px 0px rgba(0, 0, 0, 1);
-	box-shadow:         0px 0px 20px 0px rgba(0, 0, 0, 1);
-	overflow: hidden;
+    width: 1024px;
+    height: 600px;
+    background-color: black;
+    position: relative;
+    display: inline-block;
+    -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 1);
+    -moz-box-shadow:    0px 0px 20px 0px rgba(0, 0, 0, 1);
+    box-shadow:         0px 0px 20px 0px rgba(0, 0, 0, 1);
+    overflow: hidden;
 }
 
 .container {
-	text-align: center;
-	display: table-cell;
-	vertical-align: middle;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .clearfix {
-	clear: both;
+    clear: both;
 }

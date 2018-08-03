@@ -1,20 +1,20 @@
 * {
-	margin: 0px;
-	padding: 0px;
-	max-width: 100%;
-	max-height: 100%;
-	font-family: Arial, sans-serif;
-	box-sizing: border-box;
-	-webkit-user-select: none;  /* Chrome all / Safari all */
-	-moz-user-select: none;     /* Firefox all */
-	-ms-user-select: none;      /* IE 10+ */
-	user-select: none;
+    margin: 0px;
+    padding: 0px;
+    max-width: 100%;
+    max-height: 100%;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;
 }
 
 button {
-	-webkit-appearance: none;
-	-moz-appearance:    none;
-	appearance:         none;
+    -webkit-appearance: none;
+    -moz-appearance:    none;
+    appearance:         none;
 }
 
 @font-face {
@@ -25,117 +25,117 @@ button {
 }
 
 body {
-	overflow: hidden;
+    overflow: hidden;
 }
 
 button {
-	background-color: '#CCCCCC';
-	border: none;
-	padding: 15px;
-	border-radius: 5px;
-	font-size: 18px;
+    background-color: '#CCCCCC';
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 18px;
 }
 
 #interface {
-	width: 100%;
-	height: 100%;
-	color: white;
+    width: 100%;
+    height: 100%;
+    color: white;
 }
 
 #timer {
-	width: 100%;
-	height: 30px;
-	position: relative;
+    width: 100%;
+    height: 30px;
+    position: relative;
 }
 
 #timer > * {
-	position: absolute;
-	top: 0px;
+    position: absolute;
+    top: 0px;
 }
 
 #timer .display,
 #score {
-	top: 3px;
-	text-align: center;
-	width: 100%;
-	font-size: 26px;
-	font-weight: bold;
-	font-family: 'dos';
+    top: 3px;
+    text-align: center;
+    width: 100%;
+    font-size: 26px;
+    font-weight: bold;
+    font-family: 'dos';
 }
 
 #mute {
-	float: left;
+    float: left;
 }
 
 #score {
-	float: right;
-	width: auto;
-	margin: 5px;
+    float: right;
+    width: auto;
+    margin: 5px;
 }
 
 #score .display {
-	font-family: 'dos';
+    font-family: 'dos';
 }
 
 #timer #progress {
-	height: 100%;
-	background-color: orange;
+    height: 100%;
+    background-color: orange;
 }
 
 #timer #skull {
-	z-index: 1;
-	left: 5px;
+    z-index: 1;
+    left: 5px;
 }
 
 #timer #star {
-	right: 5px;
+    right: 5px;
 }
 
 #pause_container,
 #loading_container {
-	font-size: 24px;
-	text-align: center;
-	position: fixed;
-	top: 0px;
-	left: 0px;
-	width: 100%;
-	height: 100%;
-	display: none;
-	margin-top: 20%;
+    font-size: 24px;
+    text-align: center;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    display: none;
+    margin-top: 20%;
 }
 
 #loading_container {
-	background-color: black;
-	display: block;
-	z-index: 2;
-	margin-top: 0px;
-	padding-top: 26%;
+    background-color: black;
+    display: block;
+    z-index: 2;
+    margin-top: 0px;
+    padding-top: 26%;
 }
 
 #pause_container *,
 #loading_container * {
-	font-family: 'dos';
+    font-family: 'dos';
 }
 
 #pause_container > div,
 #loading_container > div {
-	width: 40%;
-	background-color: black;
-	margin: 0px auto;
-	padding: 30px;
+    width: 40%;
+    background-color: black;
+    margin: 0px auto;
+    padding: 30px;
 }
 
 #pause_container p {
-	margin: 10px;
+    margin: 10px;
 }
 
 #pause_container .space{
-	width: 40px;
-	display: inline-block;
+    width: 40px;
+    display: inline-block;
 }
 
 #quintus_container {
-	position: absolute !important;
-	top: 0px;
-	z-index: -1;
+    position: absolute !important;
+    top: 0px;
+    z-index: -1;
 }

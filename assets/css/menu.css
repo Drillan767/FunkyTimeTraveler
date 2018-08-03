@@ -1,72 +1,72 @@
-/* Polices */
+/* Font */
 @font-face {
-  font-family: 'chocolate_dealer';
-  src: url('../font/chocolate_dealer.eot');
-  src: url('../font/chocolate_dealer.eot?#iefix') format('embedded-opentype'),
-  url('../font/chocolate_dealer.ttf') format('truetype'),
-  url('../font/chocolate_dealer.otf') format('opentype');
+    font-family: 'chocolate_dealer';
+    src: url('../font/chocolate_dealer.eot');
+    src: url('../font/chocolate_dealer.eot?#iefix') format('embedded-opentype'),
+    url('../font/chocolate_dealer.otf') format('opentype'),
+    url('../font/chocolate_dealer.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: 'fipps';
-  src: url('../font/fipps.eot');
-  src: url('../font/fipps.eot?#iefix') format('embedded-opentype'),
-  url('../font/fipps.ttf') format('truetype'),
-  url('../font/fipps.otf') format('opentype');
+    font-family: 'fipps';
+    src: url('../font/fipps.eot');
+    src: url('../font/fipps.eot?#iefix') format('embedded-opentype'),
+    url('../font/fipps.otf') format('opentype'),
+    url('../font/fipps.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: 'dos';
-  src: url('../font/dos.eot');
-  src: url('../font/dos.eot?#iefix') format('embedded-opentype'),
-  url('../font/dos.ttf') format('truetype');
+    font-family: 'dos';
+    src: url('../font/dos.eot');
+    src: url('../font/dos.eot?#iefix') format('embedded-opentype'),
+    url('../font/dos.ttf') format('truetype');
 }
 
 #title h1 {
-  font-family: 'fipps';
-  font-size: 30px;
-  margin: 20px;
+    font-family: 'fipps';
+    font-size: 30px;
+    margin: 0px 0px 20px 0px;
 }
 
 #regles-content {
-  margin-top: 50px;
-  padding-left: 40px;
-  padding-right: 40px;
-  font-family:'dos';
-  text-align: justify;
-  color:white;
-  font-size:1.4em;
-  width:1024px;
+    margin-top: 50px;
+    padding-left: 40px;
+    padding-right: 40px;
+    font-family:'dos';
+    text-align: justify;
+    color:white;
+    font-size:1.4em;
+    width:1024px;
 }
 
 #backHome {
-  font-size: 16px;
-  position: absolute;
-  bottom: 20px;
-  display: block;
-  width: 100%;
+    font-size: 16px;
+    position: absolute;
+    bottom: 20px;
+    display: block;
+    width: 100%;
 }
 
 #menu-central {
-  margin: 0px auto;
-  width: 500px; 
-  height: 600px;
-  background: black;
-  text-align: center; 
+    margin: 0px auto;
+    width: 500px; 
+    height: 600px;
+    background: black;
+    text-align: center; 
 }
 
 #flamme,
 #flamme2 {
-  position:absolute;
-  top: 80px;
-  left: 80px;
-  width: 70px;
-  height: 70px;
+    position:absolute;
+    top: 80px;
+    left: 80px;
+    width: 70px;
+    height: 70px;
 }
 
 #flamme2 {
-  left: inherit;
-  right: 80px;
+    left: inherit;
+    right: 80px;
 }
 
 #hourglass {
@@ -76,129 +76,132 @@
 }
 
 nav {
-  margin-bottom:25px;
+    margin-bottom:25px;
 }
 
 nav li {
-  list-style: none;
-  margin-top: 20px;
-  height: 50px;
+    list-style: none;
+    margin-top: 20px;
+    height: 50px;
 }
 
 nav li a {
-  font-size:20px; 
+    font-size:20px; 
 }
 
 nav li:hover a {
-  color:skyblue;
+    color:skyblue;
 }
 
 nav li#play {
-  height: 76px; 
+    height: 76px; 
 }
 
 nav li#play a {
-  font-size: 30px;  
+    font-size: 30px;  
 }
 
 nav li#play a:hover {
-  color:purple;
+    color:purple;
 }
 
 #mute,
 #version {
-  position: absolute;
-  bottom: 20px;
-  z-index: 10;
+    position: absolute;
+    bottom: 20px;
+    z-index: 10;
 }
 #mute {left: 20px;}
 #version {right: 20px;}
 /*------------Titre------------------*/
 p {
-  text-align: center;
-  font-family: 'dos';
+    text-align: center;
+    font-family: 'dos';
 }
 
 a {
-  text-decoration: none;
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  transition: all 0.5s;
-  font-family: 'fipps';
-  font-size:0.7em;
-  color: white; 
+    text-decoration: none;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    transition: all 0.5s;
+    font-family: 'fipps';
+    font-size:0.7em;
+    color: white; 
 }
 
 #menu-central h1 {
-  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px rgb(65, 17, 255), 0 0 70px #6D11FF, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
-  color: grey;
-  font-size: 128px;
-  font-family: 'chocolate_dealer';
-  -webkit-animation: neon 1.5s ease-in-out infinite alternate;
-  -moz-animation: neon 1.5s ease-in-out infinite alternate;
-  animation: neon 1.5s ease-in-out infinite alternate;
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  transition: all 0.5s;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px rgb(65, 17, 255), 0 0 70px #6D11FF, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
+    color: grey;
+    font-size: 128px;
+    font-family: 'chocolate_dealer';
+    -webkit-animation: neon 1.5s ease-in-out infinite alternate;
+    -moz-animation: neon 1.5s ease-in-out infinite alternate;
+    animation: neon 1.5s ease-in-out infinite alternate;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    transition: all 0.5s;
 }
 
 #menu-central h1:hover {
-  color: #FF1177;
-  -webkit-animation: none;
-  -moz-animation: none;
-  animation: none;
+    color: #FF1177;
+    -webkit-animation: none;
+    -moz-animation: none;
+    animation: none;
 
 }
 /* glow */
 @-webkit-keyframes neon {
-  from {
-    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
-  }
-  to {
-    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF1177, 0 0 35px #FF1177, 0 0 40px #FF1177, 0 0 50px #FF1177, 0 0 75px #FF1177;
-  }
+    from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
+    }
+    to {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF1177, 0 0 35px #FF1177, 0 0 40px #FF1177, 0 0 50px #FF1177, 0 0 75px #FF1177;
+    }
 }
 
 @-moz-keyframes neon {
-  from {
-    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
-  }
-  to {
-    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF1177, 0 0 35px #FF1177, 0 0 40px #FF1177, 0 0 50px #FF1177, 0 0 75px #FF1177;
-  }
+    from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
+    }
+    to {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF1177, 0 0 35px #FF1177, 0 0 40px #FF1177, 0 0 50px #FF1177, 0 0 75px #FF1177;
+    }
 }
 
 @keyframes neon {
-  from {
-    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
-  }
-  to {
-    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF1177, 0 0 35px #FF1177, 0 0 40px #FF1177, 0 0 50px #FF1177, 0 0 75px #FF1177;
-  }
+    from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
+    }
+    to {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF1177, 0 0 35px #FF1177, 0 0 40px #FF1177, 0 0 50px #FF1177, 0 0 75px #FF1177;
+    }
 }
 
 .copyright{
-  font-family: 'dos';
-  font-size: 25px;
-  color:grey;
-  position: absolute;
-  bottom: 20px;
-  left: 0px;
-  width: 100%;
+    font-family: 'dos';
+    font-size: 25px;
+    color: grey;
+    position: absolute;
+    bottom: 20px;
+    left: 0px;
+    width: 100%;
 }
 
-h4{
-  font-family: 'fipps';
-  position: absolute;
-  top: 90px; 
-  left:340px;
-  font-size: 20px;
-  color:grey;
+h4 {
+    font-family: 'fipps';
+    position: absolute;
+    top: 90px; 
+    left: 340px;
+    font-size: 20px;
+    color: grey;
 }
 
 /* Ranking */
-ol {
-  font-family: 'dos';
-  font-size: 28px;
-  list-style-position: inside;
+#page_ranking ol {
+    font-family: 'dos';
+    font-size: 28px;
+    list-style-position: inside;
+    overflow-y: auto;
+    max-height: 100%;
+    padding-bottom: 180px;
 }
