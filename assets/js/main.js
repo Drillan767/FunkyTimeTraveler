@@ -2,6 +2,8 @@ var isMuted = false;
 $(document).ready(function() {
 	if ($('body').attr('data-sound') == 'off') {
 		stopSound($('#mute'));
+	} else {
+		$('#menu audio')[0].play();
 	}
 	$(document).on('click', '#mute', function() {
 		if (!isMuted) {
