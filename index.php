@@ -17,10 +17,18 @@ require_once('config.php');
 	<meta name="viewport" content="width=1024, user-scalable=no"/>
 	<meta name="apple-mobile-web-app-capable" content="yes"/>
 	<meta name="apple-mobile-web-app-title" content="<?php echo SITE_NAME; ?>"/>
-	<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 	<meta name="apple-touch-fullscreen" content="yes"/>
 	<meta name="format-detection" content="telephone=yes"/>
 	<meta name="HandheldFriendly" content="true"/>
+	<?php if (isMobile()) {
+		echo '<script type="text/javascript">
+			<!-- Pour que les liens restent dans la WebApp -->
+			(function(e,t,n)
+			{if(n in t&&t[n]){var r,i=e.location,s=/^(a|html)$/i;e.addEventListener("click",function(e){r=e.target;while(!s.test(r.nodeName)){r=r.parentNode}if("href"in r&&(r.href.indexOf("http")||~r.href.indexOf(i.host))){e.preventDefault();i.href=r.href}},false);}}
+			)(document,window.navigator,"standalone")
+		</script>';
+	}?>
 
 	<meta property="og:url" content="http://polletquentin74.fr/projects/G4/FunkyTimeTraveler/"/>
 	<meta property="og:title" content="<?php echo SITE_NAME; ?>"/>
