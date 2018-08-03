@@ -21,7 +21,7 @@ if (!empty($_POST['name'])) {
 			$json[] = $_POST;
 		}
 
-		uasort($json, "sortRakingByScore");
+		uasort($json, "sortRankingByScore");
 		$json = array_values($json);
 	} else {
 		$json[] = $_POST;
@@ -29,7 +29,7 @@ if (!empty($_POST['name'])) {
 	file_put_contents('../assets/json/ranking.json', json_encode($json));
 }
 
-function sortRakingByScore($a, $b) {
+function sortRankingByScore($a, $b) {
 	if($a['score'] < $b['score']) {
 		return 1;
 	} else if($a['score'] > $b['score']) {
