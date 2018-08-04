@@ -13,14 +13,14 @@ define('VERSION', '1.1');
 
 /* Set the language according to the browser */
 $lang_accept = array('fr', 'en');
-if (!isset($_SESSION['lang'])) {    
+if (!isset($_SESSION['lang'])) {
 	$_SESSION['lang'] = getBrowserLang();
 	if ($_SESSION['lang'] != 'fr') {
 		$_SESSION['lang'] = 'en';
 	}
 }
 
-if (!isset($_SESSION['sound'])) {    
+if (!isset($_SESSION['sound'])) {
 	$_SESSION['sound'] = 'on';
 }
 
