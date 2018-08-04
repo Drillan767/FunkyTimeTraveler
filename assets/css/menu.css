@@ -49,10 +49,10 @@
 
 #menu-central {
     margin: 0px auto;
-    width: 500px; 
+    width: 500px;
     height: 600px;
     background: black;
-    text-align: center; 
+    text-align: center;
 }
 
 #flamme,
@@ -86,7 +86,7 @@ nav li {
 }
 
 nav li a {
-    font-size:20px; 
+    font-size:20px;
 }
 
 nav li:hover a {
@@ -94,11 +94,11 @@ nav li:hover a {
 }
 
 nav li#play {
-    height: 76px; 
+    height: 76px;
 }
 
 nav li#play a {
-    font-size: 30px;  
+    font-size: 30px;
 }
 
 nav li#play a:hover {
@@ -126,7 +126,7 @@ a {
     transition: all 0.5s;
     font-family: 'fipps';
     font-size:0.7em;
-    color: white; 
+    color: white;
 }
 
 #menu-central h1 {
@@ -190,18 +190,27 @@ a {
 h4 {
     font-family: 'fipps';
     position: absolute;
-    top: 90px; 
+    top: 90px;
     left: 340px;
     font-size: 20px;
     color: grey;
 }
 
 /* Ranking */
+#page_ranking #title {
+    display: inline-flex;
+    flex-direction: column;
+}
+
 #page_ranking ol {
     font-family: 'dos';
     font-size: 28px;
     list-style-position: inside;
     overflow-y: auto;
     max-height: 100%;
-    padding-bottom: 180px;
+}
+
+#page_ranking #backHome {
+    line-height: 80px;
+    position: initial;
 }

@@ -7,8 +7,8 @@
 		$json = json_decode($json, true);
 		echo '<ol>';
 		foreach ($json as $key => $score) {
-			if ($key >= 14) {
-				continue;
+			if ($key == 30) {
+				break;
 			}
 			echo '<li>'.$score['name'].' : '.$score['score'].'</li>';
 		}
